@@ -1,0 +1,31 @@
+.header-techy {
+  display: flex;
+  align-items: center;
+  padding: 20px 40px;
+  background: linear-gradient(90deg, #121b22, #1e2a38);
+  box-shadow: 0 0 15px #00aaff88;
+  gap: 20px;
+}
+
+.header-logo {
+  height: 50px;
+  width: auto;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #00aaff;
+}
+
+.header-title {
+  color: #a0cfff;
+  font-weight: 700;
+  font-size: 1.8rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.popup{
+  display:flex;
+  text-align: center;
+}
+
+
+
