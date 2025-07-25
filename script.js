@@ -1,37 +1,40 @@
+
+//Element Selection
 const form = document.getElementById('search-form');
 const results = document.getElementById('results');
 const API_KEY = 'ef5e3854';
-
+//registers when form is submitted
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
-  results.innerHTML = '';
 
+//grabs values from form  
+  results.innerHTML = '';
   const title = document.getElementById('title').value.trim();
   const genre = document.getElementById('genre').value.trim().toLowerCase();
   const year = document.getElementById('year').value.trim();
-
+//Handle Missing Title
   if (!title) {
-    results.innerHTML = '<p>Please enter a movie title.</p>';
+    results.innerHTML = '<p class="text-emerald-600 max-w-xl mx-auto">Please enter a movie title.</p>';
     return;
   }
-
+//Fetch Movies from OMDb
   const response = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${title}&type=movie${year ? `&y=${year}` : ''}`);
   const data = await response.json();
-
+//Handle No Results
   if (data.Response === 'False') {
-    results.innerHTML = `<p>${data.Error}</p>`;
+    results.innerHTML = `<p class="text-emerald-600 max-w-xl mx-auto">${data.Error}</p>`;
     return;
   }
-
+//Loop Through Search Results
   const movies = data.Search;
-
+// Get Movie Details
   for (const movie of movies) {
     const detailsRes = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&i=${movie.imdbID}`);
     const details = await detailsRes.json();
-
+//Filter by genre and year
     if (genre && !details.Genre.toLowerCase().includes(genre)) continue;
     if (year && details.Year !== year) continue;
-
+//Build the Movie Card
     const card = document.createElement('div');
     card.className = 'bg-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-transform flex flex-col';
     card.innerHTML = `
